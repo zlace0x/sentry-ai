@@ -25,6 +25,7 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
       .default([]),
     BOT_ADMINS: z.array(z.number()).default([]),
 
+    CORCEL_API_KEY: z.string().optional(),
     CHAINBASE_API_KEY: z.string().optional(),
     CHAIN_ID: z.number().default(42161),
   })

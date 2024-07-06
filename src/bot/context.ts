@@ -11,7 +11,7 @@ import type { ParseModeFlavor } from '@grammyjs/parse-mode'
 import type { Logger } from '#root/logger.js'
 import type { PrismaClientX } from '#root/prisma/index.js'
 
-type AvailableMethods = 'change-prompt'
+type AvailableMethods = 'change-prompt' | 'query-address'
 
 export interface SessionData {
   activeMethod?: AvailableMethods

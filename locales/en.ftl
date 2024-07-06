@@ -29,10 +29,14 @@ address =
     Prompt: {$prompt}
     Monitor: {$monitoringStatus}
     .query = Query
+    .query-stop = End
+    .query-address-prompt = Enter your query for this address
     .add-prompt = Add prompt
     .change-prompt = Enter an prompt to monitor this address (eg. "Notify me on transfers")
     .changed-prompt = Prompt updated
     .remove = 🗑️
+    .deleted = Address deleted
+    .querying = Querying...
 
 
 unhandled = Unrecognized command. Try /start
