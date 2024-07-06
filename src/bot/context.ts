@@ -1,5 +1,9 @@
 import type { Update, UserFromGetMe } from '@grammyjs/types'
-import { type Api, Context as DefaultContext, type SessionFlavor } from 'grammy'
+import {
+  type Api,
+  Context as DefaultContext,
+  type SessionFlavor,
+} from 'grammy'
 import type { AutoChatActionFlavor } from '@grammyjs/auto-chat-action'
 import type { HydrateFlavor } from '@grammyjs/hydrate'
 import type { I18nFlavor } from '@grammyjs/i18n'
@@ -7,8 +11,11 @@ import type { ParseModeFlavor } from '@grammyjs/parse-mode'
 import type { Logger } from '#root/logger.js'
 import type { PrismaClientX } from '#root/prisma/index.js'
 
+type AvailableMethods = 'change-prompt'
+
 export interface SessionData {
-  // field?: string;
+  activeMethod?: AvailableMethods
+  activeParams?: Record<string, unknown>
 }
 
 interface ExtendedContextFlavor {

@@ -3,13 +3,8 @@ import { hydrate } from '@grammyjs/hydrate'
 import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
 import type { BotConfig, StorageAdapter } from 'grammy'
 import { Bot as TelegramBot, session } from 'grammy'
-import type {
-  Context,
-  SessionData,
-} from '#root/bot/context.js'
-import {
-  createContextConstructor,
-} from '#root/bot/context.js'
+import type { Context, SessionData } from '#root/bot/context.js'
+import { createContextConstructor } from '#root/bot/context.js'
 import {
   addPromptFeature,
   adminFeature,
@@ -51,7 +46,10 @@ export function createBot(token: string, options: Options) {
   protectedBot.use(hydrate())
   protectedBot.use(
     session({
-      initial: () => ({}),
+      initial: () => ({
+        activeMethod: undefined,
+        activeParams: undefined,
+      }),
       storage: sessionStorage,
     }),
   )
