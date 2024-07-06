@@ -10,37 +10,52 @@ Usecases:
 
 ## Architecture
 
-3. **Launching the Bot**
+This project is built using the following technologies
 
-    You can run your bot in both development and production modes.
+1. Chainbase - Profiles initial wallet address
 
-    **Development Mode:**
+2. 
 
-    Install the required dependencies:
-    ```bash
-    bun install
-    ```
-    Start the bot in watch mode (auto-reload when code changes):
-    ```bash
-    bun dev
-    ```
 
-   **Production Mode:**
 
-    Install only production dependencies (no development dependencies):
-    ```bash
-    bun install --only=prod
-    ```
+## Development
 
-    Set `NODE_ENV` environment variable to `production` in your `.env` file. <br />
-    Update `BOT_WEBHOOK` with the actual URL where your bot will receive updates. <br />
-    Update `BOT_WEBHOOK_SECRET` with a random secret token.
+ **Launching the Bot**
 
-    ```dotenv
-    NODE_ENV=production
-    BOT_WEBHOOK=<server_url>/webhook
-    BOT_WEBHOOK_SECRET=<random_secret_value>
-    ```
+  You can run your bot in both development and production modes.
+
+  **Setup**
+  ```bash
+  cp .env.examples .env
+  ```
+
+  **Development Mode:**
+
+  Install the required dependencies:
+  ```bash
+  bun install
+  ```
+  Start the bot in watch mode (auto-reload when code changes):
+  ```bash
+  bun dev
+  ```
+
+  **Production Mode:**
+
+  Install only production dependencies (no development dependencies):
+  ```bash
+  bun install --only=prod
+  ```
+
+  Set `NODE_ENV` environment variable to `production` in your `.env` file. <br />
+  Update `BOT_WEBHOOK` with the actual URL where your bot will receive updates. <br />
+  Update `BOT_WEBHOOK_SECRET` with a random secret token.
+
+  ```dotenv
+  NODE_ENV=production
+  BOT_WEBHOOK=<server_url>/webhook
+  BOT_WEBHOOK_SECRET=<random_secret_value>
+  ```
 
     Start the bot in production mode:
     ```bash

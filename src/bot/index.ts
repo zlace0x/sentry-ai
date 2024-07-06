@@ -11,6 +11,7 @@ import {
   createContextConstructor,
 } from '#root/bot/context.js'
 import {
+  addPromptFeature,
   adminFeature,
   languageFeature,
   unhandledFeature,
@@ -55,6 +56,7 @@ export function createBot(token: string, options: Options = {}) {
   // Handlers
   protectedBot.use(welcomeFeature)
   protectedBot.use(adminFeature)
+  protectedBot.use(addPromptFeature)
 
   if (isMultipleLocales)
     protectedBot.use(languageFeature)

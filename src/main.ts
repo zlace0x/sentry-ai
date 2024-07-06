@@ -56,12 +56,10 @@ async function startWebhook() {
     config.BOT_SERVER_HOST,
     config.BOT_SERVER_PORT,
   )
+
   logger.info({
     msg: 'Server started',
-    url:
-      info.family === 'IPv6'
-        ? `http://[${info.address}]:${info.port}`
-        : `http://${info.address}:${info.port}`,
+    url: info.url,
   })
 
   // set webhook

@@ -12,7 +12,7 @@ const feature = composer.chatType('private').filter(isAdmin)
 feature.command(
   'setcommands',
   logHandle('command-setcommands'),
-  chatAction('typing'),
+  chatAction<Context>('typing'),
   setCommandsHandler,
 )
 
