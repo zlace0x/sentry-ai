@@ -18,18 +18,18 @@ Usecases:
 
     Install the required dependencies:
     ```bash
-    npm install
+    bun install
     ```
     Start the bot in watch mode (auto-reload when code changes):
     ```bash
-    npm run dev
+    bun dev
     ```
 
    **Production Mode:**
 
     Install only production dependencies (no development dependencies):
     ```bash
-    npm install --only=prod
+    bun install --only=prod
     ```
 
     Set `NODE_ENV` environment variable to `production` in your `.env` file. <br />
@@ -44,19 +44,19 @@ Usecases:
 
     Start the bot in production mode:
     ```bash
-    npm start # with type checking (requires development dependencies)
+    bun start # with type checking (requires development dependencies)
     # or
-    npm run start:force # skip type checking and start
+    bun start:force # skip type checking and start
     ```
 
 ### List of Available Commands
 
-- `npm run lint` — Lint source code.
-- `npm run format` — Format source code.
-- `npm run typecheck` — Run type checking.
-- `npm run dev` — Start the bot in development mode.
-- `npm run start` — Start the bot.
-- `npm run start:force` — Starts the bot without type checking.
+- `bun lint` — Lint source code.
+- `bun format` — Format source code.
+- `bun typecheck` — Run type checking.
+- `bun dev` — Start the bot in development mode.
+- `bun start` — Start the bot.
+- `bun start:force` — Starts the bot without type checking.
 
 ### Directory Structure
 
