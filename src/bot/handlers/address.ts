@@ -11,6 +11,7 @@ import { clearMethodData } from '../callback-data/clear-method.js'
 import { config } from '#root/config.js'
 
 import { generateCorcelText } from '#root/modules/ai/ai.service.js'
+import { getAddressBalances } from '#root/modules/address/address.service.js'
 
 export async function handleAddress(ctx: Context, token: string) {
   const address = getAddress(token, config.CHAIN_ID)
@@ -95,7 +96,28 @@ export async function handleQueryAddress(ctx: Context) {
   })
 
   if (!address) {
-    return ctx.reply(ctx.t('address.error'), {
+    return ctx.reply(ctx.t('address.error'))
+  }
+
+  const message = await ctx.reply(ctx.t('address.querying'))
+
+  const balances = await getAddressBalances(address.address)
+
+  const response = await generateCorcelText([
+    openai.ChatMessage.system(
+      `As a blockchain assistent monitoring the address ${address.address} you observed the following:`,
+    ),
+    openai.ChatMessage.user(balances.join('\n')),
+    openai.ChatMessage.user(
+      `Given the address ${address.address} on the blockchain.`,
+    ),
+    openai.ChatMessage.user(
+      `${ctx.message?.text ?? address.prompt ?? 'Show a summary'}`,
+    ),
+  ])
+
+  if (response) {
+    return message.editText(response, {
       reply_markup: {
         inline_keyboard: [
           [
@@ -108,21 +130,4 @@ export async function handleQueryAddress(ctx: Context) {
       },
     })
   }
-
-  const message = await ctx.reply(ctx.t('address.querying'))
-
-  const response = await generateCorcelText([
-    openai.ChatMessage.system(
-      `As a blockchain assistent monitoring the address ${address.address} you observed the following:`,
-    ),
-    openai.ChatMessage.user(
-      `Given the address ${address.address} on the blockchain.`,
-    ),
-    openai.ChatMessage.user(
-      `${ctx.message?.text ?? address.prompt ?? 'Show a summary'}`,
-    ),
-  ])
-
-  if (response)
-    return message.editText(response)
 }
