@@ -13,7 +13,9 @@ import {
 import {
   addPromptFeature,
   adminFeature,
+  allPromptFeature,
   languageFeature,
+  textFeature,
   unhandledFeature,
   welcomeFeature,
 } from '#root/bot/features/index.js'
@@ -59,6 +61,8 @@ export function createBot(token: string, options: Options) {
   protectedBot.use(welcomeFeature)
   protectedBot.use(adminFeature)
   protectedBot.use(addPromptFeature)
+  protectedBot.use(allPromptFeature)
+  protectedBot.use(textFeature)
 
   if (isMultipleLocales)
     protectedBot.use(languageFeature)

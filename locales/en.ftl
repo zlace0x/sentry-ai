@@ -17,4 +17,12 @@ admin =
 command = 
     .add-prompt = Enter an address on ethereum
 
+address = 
+    .added = Added new address
+    .summary = Address: <code>{$address}</code>
+    Monitor: {$monitoringStatus}
+    .query = Query
+    .remove = 🗑️
+    .invalid = Invalid input
+
 unhandled = Unrecognized command. Try /start
