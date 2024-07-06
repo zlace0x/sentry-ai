@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  telegramId BigInt    @unique @map("telegram_id")
+  username   String?
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  addresses  Address[]
+
+  @@map(name: "users")
+}
+
+model Address {
+  id     Int  @id @default(autoincrement())
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id])
+
+  address   String
+  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  prompt    String?
+
+  isDeleted Boolean @default(false) @map("is_deleted")
+
+  @@unique([userId, address])
+  @@map(name: "wallets")
+}
+
+model AddressInfo {
+  address     String      @id
+  addressType AddressType @map("address_type")
+
+  description String?
+
+  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+enum AddressType {
+  CONTRACT
+  EOA
+}

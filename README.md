@@ -14,9 +14,7 @@ This project is built using the following technologies
 
 1. Chainbase - Profiles initial wallet address
 
-2. 
-
-
+2.
 
 ## Development
 
@@ -31,14 +29,18 @@ This project is built using the following technologies
 
   **Development Mode:**
 
-  Install the required dependencies:
-  ```bash
-  bun install
-  ```
-  Start the bot in watch mode (auto-reload when code changes):
-  ```bash
-  bun dev
-  ```
+    Install the required dependencies:
+    ```bash
+    bun install
+    ```
+    Run migrations:
+    ```bash
+    npx prisma migrate dev
+    ```
+    Start the bot in watch mode (auto-reload when code changes):
+    ```bash
+    bun dev
+    ```
 
   **Production Mode:**
 
@@ -47,15 +49,22 @@ This project is built using the following technologies
   bun install --only=prod
   ```
 
-  Set `NODE_ENV` environment variable to `production` in your `.env` file. <br />
-  Update `BOT_WEBHOOK` with the actual URL where your bot will receive updates. <br />
-  Update `BOT_WEBHOOK_SECRET` with a random secret token.
+    Set `NODE_ENV` environment variable to `production` in your `.env` file. <br />
+    Update `BOT_WEBHOOK` with the actual URL where your bot will receive updates. <br />
+    Update `BOT_WEBHOOK_SECRET` with a random secret token. <br />
+    Update `DATABASE_URL` with a production database.
 
-  ```dotenv
-  NODE_ENV=production
-  BOT_WEBHOOK=<server_url>/webhook
-  BOT_WEBHOOK_SECRET=<random_secret_value>
-  ```
+    ```dotenv
+    NODE_ENV=production
+    BOT_WEBHOOK=<server_url>/webhook
+    BOT_WEBHOOK_SECRET=<random_secret_value>
+    DATABASE_URL=<production_db_url>
+    ```
+
+    Run migrations:
+    ```bash
+    npx prisma migrate deploy
+    ```
 
     Start the bot in production mode:
     ```bash
@@ -297,6 +306,15 @@ bun add -d @types/bun
     </td>
     <td>
         Telegram Bot API token obtained from <a href="https://t.me/BotFather">@BotFather</a>.
+    </td>
+  </tr>
+  <tr>
+    <td>DATABASE_URL</td>
+    <td>
+        String
+    </td>
+    <td>
+        Database connection.
     </td>
   </tr>
     <tr>

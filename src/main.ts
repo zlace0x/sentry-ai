@@ -1,6 +1,7 @@
 #!/usr/bin/env tsx
 
 import process from 'node:process'
+import { prisma } from './prisma/index.js'
 import { createBot } from '#root/bot/index.js'
 import { config } from '#root/config.js'
 import { logger } from '#root/logger.js'
@@ -20,12 +21,18 @@ function onShutdown(cleanUp: () => Promise<void>) {
 }
 
 async function startPolling() {
-  const bot = createBot(config.BOT_TOKEN)
+  logger.info('Starting bot (polling)...')
+  const bot = createBot(config.BOT_TOKEN, {
+    prisma,
+  })
 
   // graceful shutdown
   onShutdown(async () => {
     await bot.stop()
   })
+
+  // connect to database
+  await prisma.$connect()
 
   // start bot
   await bot.start({
@@ -39,7 +46,12 @@ async function startPolling() {
 }
 
 async function startWebhook() {
-  const bot = createBot(config.BOT_TOKEN)
+  logger.info('Starting bot (webhook)...')
+
+  const bot = createBot(config.BOT_TOKEN, {
+    prisma,
+  })
+
   const server = createServer(bot)
   const serverManager = createServerManager(server)
 
@@ -47,6 +59,9 @@ async function startWebhook() {
   onShutdown(async () => {
     await serverManager.stop()
   })
+
+  // connect to database
+  await prisma.$connect()
 
   // to prevent receiving updates before the bot is ready
   await bot.init()
@@ -67,6 +82,7 @@ async function startWebhook() {
     allowed_updates: config.BOT_ALLOWED_UPDATES,
     secret_token: config.BOT_WEBHOOK_SECRET,
   })
+
   logger.info({
     msg: 'Webhook was set',
     url: config.BOT_WEBHOOK,
