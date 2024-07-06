@@ -10,4 +10,4 @@ feature.command('add', logHandle('command-add'), (ctx) => {
   return ctx.reply(ctx.t('command.add-prompt'))
 })
 
-export { composer as addPromptCommand }
+export { composer as addPromptFeature }
