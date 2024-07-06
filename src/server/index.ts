@@ -22,8 +22,7 @@ export function createServer(bot: Bot) {
     if (error instanceof HTTPException) {
       if (error.status < 500)
         c.var.logger.info(error)
-      else
-        c.var.logger.error(error)
+      else c.var.logger.error(error)
 
       return error.getResponse()
     }
@@ -51,6 +50,12 @@ export function createServer(bot: Bot) {
     }),
   )
 
+  server.post('/event', async (c) => {
+    const { body } = c.req.raw
+    c.var.logger.info({ event: body })
+    return c.json({ status: true })
+  })
+
   return server
 }
 
@@ -69,7 +74,6 @@ export function createServerManager(server: Server) {
         url: handle.url,
       }
     },
-    stop: () =>
-      handle?.stop(),
+    stop: () => handle?.stop(),
   }
 }
