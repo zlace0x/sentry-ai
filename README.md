@@ -1,44 +1,14 @@
-<h1 align="center">🤖 Telegram Bot Template</h1>
+<h1 align="center">🤖 Sentry AI</h1>
 
-<img align="right" width="35%" src="https://github.com/bot-base/telegram-bot-template/assets/26162440/c4371683-3e99-4b1c-ae8e-11ccbea78f4b">
+AI wallet monitor, get notified based on wallet activity and positions.
+For each wallet you monitor set a prompt on what you wish to be notified on.
 
-Bot starter template based on [grammY](https://grammy.dev/) bot framework.
+Usecases:
+- Monitor DAO's Multi-Sig
+- Watch your uniswap V3 LP positions
+- Monitor whales movements
 
-## Features
-
-- Scalable structure
-- Config loading and validation
-- Internationalization, language changing
-- Graceful shutdown
-- Logger (powered by [pino](https://github.com/pinojs/pino))
-- Ultrafast and multi-runtime server (powered by [hono](https://github.com/honojs/hono))
-- Ready-to-use deployment setups:
-    - [Docker](#docker-dockercom)
-    - [Vercel](#vercel-vercelcom)
-- Examples:
-    - grammY plugins:
-        - [Conversations](#grammy-conversations-grammydevpluginsconversations)
-        - [Runner](#grammy-runner-grammydevpluginsrunner)
-    - Databases:
-      - [Prisma ORM](#prisma-orm-prismaio)
-    - Runtimes:
-      - [Bun](#bun-bunsh)
-
-## Usage
-
-Follow these steps to set up and run your bot using this template:
-
-1. **Create a New Repository**
-
-    Start by creating a new repository using this template. You can do this by clicking [here](https://github.com/bot-base/telegram-bot-template/generate).
-
-2. **Environment Variables Setup**
-
-    Create an environment variables file by copying the provided example file:
-     ```bash
-     cp .env.example .env
-     ```
-    Open the newly created `.env` file and set the `BOT_TOKEN` environment variable.
+## Architecture
 
 3. **Launching the Bot**
 

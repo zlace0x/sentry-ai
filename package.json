@@ -1,9 +1,9 @@
 {
-  "name": "telegram-bot-template",
+  "name": "sentry-ai",
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Telegram bot starter template",
+  "description": "Wallet sentry AI",
   "imports": {
     "#root/*": "./build/src/*"
   },
