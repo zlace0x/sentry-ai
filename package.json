@@ -19,7 +19,8 @@
     "typecheck": "tsc",
     "build": "tsc --noEmit false",
     "dev": "bun --watch ./src/main.ts",
-    "start": "tsc && bun ./src/main.ts",
+    "start": "prisma migrate deploy && bun ./src/main.ts",
+    "postinstall": "prisma generate",
     "start:force": "bun ./src/main.ts",
     "prepare": "husky || true"
   },
