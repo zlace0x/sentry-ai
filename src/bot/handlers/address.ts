@@ -1,5 +1,4 @@
 import { getAddress } from 'viem'
-import { openai } from 'modelfusion'
 import type { Context } from '../context.js'
 
 import {
@@ -10,8 +9,7 @@ import {
 import { clearMethodData } from '../callback-data/clear-method.js'
 import { config } from '#root/config.js'
 
-import { generateCorcelText } from '#root/modules/ai/ai.service.js'
-import { getAddressBalances } from '#root/modules/address/address.service.js'
+import { runToolsAgainstQuery } from '#root/modules/ai/ai.controller.js'
 
 export async function handleAddress(ctx: Context, token: string) {
   const address = getAddress(token, config.CHAIN_ID)
@@ -101,20 +99,12 @@ export async function handleQueryAddress(ctx: Context) {
 
   const message = await ctx.reply(ctx.t('address.querying'))
 
-  const balances = await getAddressBalances(address.address)
-
-  const response = await generateCorcelText([
-    openai.ChatMessage.system(
-      `As a blockchain assistent monitoring the address ${address.address} you observed the following:`,
-    ),
-    openai.ChatMessage.user(balances.join('\n')),
-    openai.ChatMessage.user(
-      `Given the address ${address.address} on the blockchain.`,
-    ),
-    openai.ChatMessage.user(
-      `${ctx.message?.text ?? address.prompt ?? 'Show a summary'}`,
-    ),
-  ])
+  const response = await runToolsAgainstQuery(
+    ctx.api,
+    address.address,
+    ctx.message?.text ?? 'Give a summary of the address',
+    ctx.chatId as any,
+  )
 
   if (response) {
     return message.editText(response, {

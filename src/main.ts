@@ -26,9 +26,24 @@ async function startPolling() {
     prisma,
   })
 
+  const server = createServer(bot)
+  const serverManager = createServerManager(server)
+
+  // start server
+  const info = await serverManager.start(
+    config.BOT_SERVER_HOST,
+    config.BOT_SERVER_PORT,
+  )
+
+  logger.info({
+    msg: 'Server started',
+    url: info.url,
+  })
+
   // graceful shutdown
   onShutdown(async () => {
     await bot.stop()
+    await serverManager.stop()
   })
 
   // connect to database
